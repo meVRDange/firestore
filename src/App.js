@@ -1,24 +1,24 @@
-import logo from './logo.svg';
 import './App.css';
+import { useEffect, useState } from 'react';
+import { db } from './firebase';
+import { collection, getDocs } from 'firebase/firestore';
 
 function App() {
+  const [books, setBooks] = useState([]);
+  const booksRef = collection(db,"Books");
+
+  useEffect(() =>{
+    const getBooks = async () => {
+      const data = await getDocs(booksRef)
+      setBooks(data.docs.map((doc) => ({...doc.data(), id: doc.id})))
+      console.log(books);
+    }
+    getBooks()
+  }, [])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <p>Firestore</p>
+    </>
   );
 }
 
