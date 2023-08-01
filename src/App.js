@@ -17,7 +17,8 @@ function App() {
   }, [])
   return (
     <>
-      <p>Firestore</p>
+      <h1 >Firestore</h1>
+      {}
     </>
   );
 }
