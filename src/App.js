@@ -2,6 +2,7 @@ import './App.css';
 import { useEffect, useState ,useRef} from 'react';
 import { db } from './firebase';
 import { addDoc, collection, getDocs } from 'firebase/firestore';
+import TestComponent from './TestComponent';
 
 function App() {
   const [books, setBooks] = useState([]);
@@ -44,7 +45,7 @@ function App() {
   
   return (
     <>
-      <form onSubmit={handleName}>
+      {/* <form onSubmit={handleName}>
         <input type='text' ref={inputRef}/>
         <button type='submit'>submit</button>
       </form>
@@ -55,7 +56,8 @@ function App() {
             <h2>{book.Name}</h2>
           </div>
         )
-      })}
+      })} */}
+      <TestComponent/>
     </>
   );
 }

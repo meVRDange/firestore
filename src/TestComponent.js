@@ -1,36 +1,26 @@
-import { collection, getDocs } from 'firebase/firestore'
-import React, { useEffect, useState } from 'react'
-import { db } from './firebase';
+import React, {  useRef} from 'react'
+import bcrypt from 'bcryptjs'
+
 
 export default function TestComponent() {
+  const inputRef = useRef(null);
 
-    const booksRef = collection(db, "Books")
-    const [books, setBooks] = useState([]);
+  const createHash = () => {
+    const password = inputRef.current.value;
+    console.log(password);
+    const hash = bcrypt.hashSync(password, 5);
+    console.log(hash);
+  };
 
-    useEffect(() => {
-        const getBooks = async () => {
-            const data = await getDocs(booksRef)
-            setBooks(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
-            const obj = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-            setBooks(obj)
-        }
-        getBooks()
-    }, [])
-
-
-    return (
+  return (
     <>
-      <h1 >Firestore</h1>
-     {books.map((book) => {
-        // return (
-
-        //   <div key={book.id}>
-        //     <h2>{book.Name}</h2>
-        //   </div>
-
-        // )
-        console.log(book.Name)
-      })}
+      <div className="LoginDiv">
+        <button className="login">Login</button>
+      </div>
+      <div>
+        <input type="text" ref={inputRef} />
+        <button onClick={createHash}>Hash</button>
+      </div>
     </>
   );
 }
