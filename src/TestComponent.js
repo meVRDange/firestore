@@ -8,7 +8,7 @@ export default function TestComponent() {
   const createHash = () => {
     const password = inputRef.current.value;
     console.log(password);
-    const hash = bcrypt.hashSync(password, 5);
+    const hash = bcrypt.hashSync(password);
     console.log(hash);
   };
 
